@@ -54,7 +54,7 @@ export default function Home() {
               <h3>Your go to destination for budget-friendly </h3>
             </div>
             <div className="studentEssentail">
-              <h4>student Essential</h4>
+              <h4>student essentials</h4>
             </div>
             <div className="btn">
               <NavLink href="#">

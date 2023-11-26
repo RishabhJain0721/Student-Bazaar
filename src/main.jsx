@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
 import {
   Route,
@@ -13,21 +12,32 @@ import Layout from "../Layout.jsx";
 import Home from "./Components/Home/Home.jsx";
 import AboutSection from "./Components/About/About.jsx";
 import ContactSection from "./Components/Contact/Contact.jsx";
+import Login from "./Components/Login/Login.jsx";
+import Signup from "./Components/Signup/Signup.jsx";
+import Verification from "./Components/VerificationPage/VerificationPage.jsx";
+import Profile from "./Components/Profile/Profile.jsx";
+import Seller from "./Components/Seller/Seller.jsx";
+import { AuthContextProvider } from "./Contexts/AuthContext.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <>
-      <Route path="/" element={<Layout />}>
-        <Route path="" element={<Home />} />
-        <Route path="about" element={<AboutSection />} />
-        <Route path="Contactus" element={<ContactSection />} />
-      </Route>
-    </>
+    <Route path="/" element={<Layout />}>
+      <Route path="" element={<Home />} />
+      <Route path="about" element={<AboutSection />} />
+      <Route path="contactus" element={<ContactSection />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="login" element={<Login />} />
+      <Route path="verification" element={<Verification />} />
+      <Route path="profile" element={<Profile />} />
+      <Route path="sell" element={<Seller />} />
+    </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
   </React.StrictMode>
 );
