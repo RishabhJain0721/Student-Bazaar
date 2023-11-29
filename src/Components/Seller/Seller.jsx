@@ -13,6 +13,7 @@ const SellForm = () => {
   const [pickupLocation, setPickupLocation] = useState("");
   const [itemCost, setItemCost] = useState("");
   const [images, setImages] = useState([]);
+  const [category, setCategory] = useState("");
   const [bigFileDialogue, setBigFileDialogue] = useState(false);
   const navigate = useNavigate();
 
@@ -130,6 +131,29 @@ const SellForm = () => {
               onChange={(e) => setContactNumber(e.target.value)}
             />
           </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Category
+            </label>
+            <div className="mt-1">
+              <select
+                id="item_category"
+                name="item_category"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="" disabled selected>
+                  Select Category
+                </option>
+                <option value="Electronics">Electronics</option>
+                <option value="Books">Books</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
           <div className="mb-4">
             <Input
               label="Pickup Location"
