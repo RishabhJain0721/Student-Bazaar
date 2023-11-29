@@ -32,7 +32,7 @@ const router = createBrowserRouter(
       <Route path="contactus" element={<ContactSection />} />
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
-      <Route path="verification" element={<Verification />} />
+      <Route path="verify-email" element={<Verification />} />
       <Route path="profile" element={<Profile />} />
       <Route path="sell" element={<Seller />} />
       <Route path="item/:id" element={<ItemInfo />} />
