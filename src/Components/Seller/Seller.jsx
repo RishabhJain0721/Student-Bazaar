@@ -4,7 +4,9 @@ import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
 
 // axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
-axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+// axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+axios.defaults.baseURL= "https://localhost:5000";
+
 
 const SellForm = () => {
   const [itemName, setItemName] = useState("");
@@ -37,7 +39,6 @@ const SellForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
 
     formData.append(
@@ -51,6 +52,7 @@ const SellForm = () => {
     formData.append("itemName", itemName);
     formData.append("itemCost", itemCost);
     formData.append("itemDescription", itemDescription);
+    formData.append("category", category);
     formData.append("contactNumber", contactNumber);
     formData.append("pickupLocation", pickupLocation);
 
@@ -65,6 +67,7 @@ const SellForm = () => {
       setItemCost("");
       setItemDescription("");
       setContactNumber("");
+      setCategory("");
       setPickupLocation("");
       setImages([]);
     } catch (error) {
