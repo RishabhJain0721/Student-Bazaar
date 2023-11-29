@@ -2,8 +2,6 @@ import { createContext, useEffect, useReducer } from "react";
 import AuthReducer from "./AuthReducer.jsx";
 import React from "react";
 
-console.log(localStorage);
-
 const INITIAL_STATE = {
   currentUser: JSON.parse(localStorage.getItem("details")) || null,
 };

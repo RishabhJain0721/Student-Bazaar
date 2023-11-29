@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import Card from "../Card/Card";
-import sampleData from "../Card/sampleData"
+// import Card from "../Card/Card";
+import { InfinitySpin } from "react-loader-spinner";
 import "./Home.css";
 import mianimags from "./images/mian-imags.jpg";
 import book from "./images/book.jpg";
@@ -12,6 +12,11 @@ import calculator from "./images/calculato.jpg";
 import telegram from "./images/telegram_icon.png";
 import watch from "./images/watch.jpg";
 import whatsapp from "./images/WhatsApp_icon.png";
+import axios from "axios";
+import ItemCard from "../ItemCard/ItemCard";
+import { SearchContext } from "../../Contexts/SearchContext";
+
+axios.defaults.baseURL = "http://localhost:5000";
 
 const App = () => {
   useEffect(() => {
@@ -42,6 +47,37 @@ const App = () => {
 };
 
 export default function Home() {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchedItems, setSearchedItems] = useState([]);
+  const { currentSearch } = useContext(SearchContext);
+
+  // Fetch all items from the database
+  useEffect(() => {
+    axios
+      .get("/api/dashboard")
+      .then((res) => {
+        setItems(res.data);
+        setSearchedItems(res.data);
+        console.log("In Items rendered on dashboard : ", res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // Filter items based on search query
+  useEffect(() => {
+    if (items) {
+      const filteredItems = items.filter((item) => {
+        return item.itemName
+          .toLowerCase()
+          .includes(currentSearch.value.toLowerCase());
+      });
+      setSearchedItems(filteredItems);
+    }
+  }, [currentSearch]);
   return (
     <>
       <div className="main">
@@ -102,11 +138,17 @@ export default function Home() {
         <h3>Available Listings :</h3>
       </div>
 
-      <div className="p-5 flex flex-wrap px-10 justify-center md:justify-start">
-          {sampleData.map((item) => (
-            <Card key={item._id} rest={item} />
+      {loading ? (
+        <div className="flex items-center justify-center h-96">
+          <InfinitySpin width="200" color="#424242" />
+        </div>
+      ) : (
+        <div className="p-5 flex flex-wrap px-10 justify-center md:justify-start">
+          {searchedItems.map((item) => (
+            <ItemCard key={item._id} rest={item} />
           ))}
         </div>
+      )}
 
       <div className="grid-wrapper">
         <div className="image-grid1">

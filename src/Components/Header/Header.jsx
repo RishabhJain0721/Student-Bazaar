@@ -19,7 +19,7 @@ export default function Header() {
   const showSidebar = () => setSidebar(!sidebar);
 
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser.token);
+  // console.log(currentUser.token);
 
   return (
     <header className="header">
@@ -87,51 +87,68 @@ export default function Header() {
 
             {currentUser ? (
               <div className="Login">
-                <img src={LoginImg} alt="" />
+                <img src={LoginImg} className="pb-1" alt="" />
                 <Link to="/profile" className="Login-text">
                   Profile
                 </Link>
                 <div className="Underline"></div>
               </div>
             ) : (
-              <div className="Login">
-                <img src={LoginImg} alt="" />
-                <Link to="/login" className="Login-text">
-                  Login
-                </Link>
-                <div className="Underline"></div>
-              </div>
+              <>
+                <div className="Login">
+                  <img src={LoginImg} alt="" />
+                  <Link to="/login" className="Login-text">
+                    Login
+                  </Link>
+                  <div className="Underline"></div>
+                </div>
+                <div className="Login">
+                  <i className="fa-solid fa-right-to-bracket text-white text-2xl pb-2"></i>
+                  <Link to="/signup" className="Login-text">
+                    Sign Up
+                  </Link>
+                  <div className="Underline"></div>
+                </div>
+              </>
             )}
-
-            <div className="Wish">
-              <img src={HeartImg} alt="" />
-              <Link to="#" className="Wish-text">
-                Wish
-              </Link>
-              <div className="Underline"></div>
-            </div>
 
             {currentUser &&
-            currentUser.token ==
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMDk0MTA3NSwiZXhwIjoxNzAxMDI3NDc1fQ.JgIEvCBgsgmzZBqc71kE3hF5vNKebHN-3KyPSjrpMsc" ? (
-              <div className="Cart">
-                <div className=" text-white font-bold text-4xl text-center">
-                  +
+              currentUser.token ===
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
+                <div className="Wish">
+                  <i className="fa-solid fa-clipboard-list text-white text-3xl pb-2 mt-1"></i>
+                  <Link to="showOrders" className="Wish-text">
+                    Orders
+                  </Link>
+                  <div className="Underline"></div>
                 </div>
-                <Link to="/sell" className="Cart-text">
-                  Add
-                </Link>
-                <div className="Underline"></div>
-              </div>
-            ) : (
-              <div className="Cart">
-                {/* <img src={CartImg} alt="" />
-                <Link to="#" className="Cart-text">
-                  Cart
-                </Link>
-                <div className="Underline"></div> */}
-              </div>
-            )}
+              )}
+
+            {currentUser &&
+              currentUser.token ===
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
+                <div className="Cart">
+                  <div className=" text-white font-bold text-4xl text-center">
+                    +
+                  </div>
+                  <Link to="/sell" className="Cart-text">
+                    Add
+                  </Link>
+                  <div className="Underline"></div>
+                </div>
+              )}
+
+            {currentUser &&
+              currentUser.token !==
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
+                <div className="Cart">
+                  <i class="fa-solid fa-list-ol text-white text-3xl pb-1"></i>
+                  <Link to="/showMyOrders" className="Cart-text">
+                    My Orders
+                  </Link>
+                  <div className="Underline"></div>
+                </div>
+              )}
           </div>
         </div>
         <hr className="Break-section" />

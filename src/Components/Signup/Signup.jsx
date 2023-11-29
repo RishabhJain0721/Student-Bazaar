@@ -10,6 +10,7 @@ axios.defaults.baseURL = "http://localhost:5000";
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState();
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -21,14 +22,16 @@ const Signup = () => {
     console.log("New user signup");
     console.log("Name : ", name);
     console.log("Email : ", email);
+    console.log("Phone : ", phone);
     console.log("Password : ", password);
     axios
-      .post("/api/auth/signup", { name, email, password })
+      .post("/api/auth/signup", { name, email, phone, password })
 
       .then((res) => {
         alert(res.data.message);
         setName("");
         setEmail("");
+        setPhone("");
         setPassword("");
       })
       .catch((err) => {
@@ -37,6 +40,7 @@ const Signup = () => {
           alert(err.response.data.message);
           setName("");
           setEmail("");
+          setPhone("");
           setPassword("");
         } else if (err.response && err.response.status === 401) {
           alert("Invalid Email");
@@ -67,6 +71,13 @@ const Signup = () => {
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            label="Phone"
+            type="number"
+            placeholder="Enter your phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           />
           <Input
             label="Password"

@@ -17,7 +17,12 @@ import Signup from "./Components/Signup/Signup.jsx";
 import Verification from "./Components/VerificationPage/VerificationPage.jsx";
 import Profile from "./Components/Profile/Profile.jsx";
 import Seller from "./Components/Seller/Seller.jsx";
+import ItemInfo from "./Components/ItemInfo/ItemInfo.jsx";
+import Orders from "./Components/Orders/Orders.jsx";
+import MyOrders from "./Components/MyOrders/MyOrders.jsx";
+import OrderInfo from "./Components/OrderInfo/OrderInfo.jsx";
 import { AuthContextProvider } from "./Contexts/AuthContext.jsx";
+import { ItemContextProvider } from "./Contexts/ItemContext.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +35,10 @@ const router = createBrowserRouter(
       <Route path="verification" element={<Verification />} />
       <Route path="profile" element={<Profile />} />
       <Route path="sell" element={<Seller />} />
+      <Route path="item/:id" element={<ItemInfo />} />
+      <Route path="showOrders" element={<Orders />} />
+      <Route path="showMyOrders" element={<MyOrders />} />
+      <Route path="myOrderDetails/:id" element={<OrderInfo />} />
     </Route>
   )
 );
@@ -37,7 +46,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <RouterProvider router={router} />
+      <ItemContextProvider>
+        <RouterProvider router={router} />
+      </ItemContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

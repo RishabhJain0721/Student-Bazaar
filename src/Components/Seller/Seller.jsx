@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
-// import CustomAlertDialogue from "../components/CustomAlertDialogue";
-
 
 // axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app/";
-axios.defaults.baseURL = "http://localhost:5000"
+axios.defaults.baseURL = "http://localhost:5000";
 
 const SellForm = () => {
   const [itemName, setItemName] = useState("");
@@ -18,18 +16,14 @@ const SellForm = () => {
   const [bigFileDialogue, setBigFileDialogue] = useState(false);
   const navigate = useNavigate();
 
-  const toggleBigFileDialogue = () => {
-    setBigFileDialogue(!bigFileDialogue);
-  };
-
-
   const handleImageUpload = (e) => {
     let selectedImages = Array.from(e.target.files);
     const maxFileSize = 500 * 1024;
 
     if (selectedImages.some((image) => image.size > maxFileSize)) {
-      alert("One or more of the selected images exceeds the maximum size of 500 kb")
-      // toggleBigFileDialogue();
+      alert(
+        "One or more of the selected images exceeds the maximum size of 500 kb"
+      );
       selectedImages = [];
     } else {
       setImages((prevImages) => [...prevImages, ...selectedImages]);
@@ -83,15 +77,6 @@ const SellForm = () => {
         <h2 className="text-2xl text-white opacity-95 font-semibold mb-4">
           Sell Your Item
         </h2>
-        {/* <CustomAlertDialogue
-          title={"File Too Big"}
-          message={
-            "One or more of the selected images exceeds the maximum size of 500 kb"
-          }
-          isVisible={bigFileDialogue}
-          toggleVisibility={toggleBigFileDialogue}
-        /> */}
-
         <form
           onSubmit={handleSubmit}
           action="/api/sell"

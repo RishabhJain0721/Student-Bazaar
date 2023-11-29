@@ -20,7 +20,6 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("logggggggggggggggggggggggginnnnnnnnnnn")
     axios
       .post("/api/auth/login", { email, password })
 

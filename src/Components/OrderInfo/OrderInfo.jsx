@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -11,7 +11,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { InfinitySpin } from "react-loader-spinner";
-import { AuthContext } from "../../Contexts/AuthContext";
 
 // axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
 axios.defaults.baseURL = "http://localhost:5000";
@@ -20,15 +19,12 @@ const ItemInfo = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [item, setItem] = useState({});
-
-  const { currentUser } = useContext(AuthContext);
-
   let blobURLs = [];
 
   // Fetch item details from the database
   useEffect(() => {
     axios
-      .post("/api/itemDetails", { id: id })
+      .post("/api/itemDetails", { id: id, type: "orderDetails" })
       .then((res) => {
         localStorage.setItem("item", JSON.stringify(res.data));
         setItem(res.data);
@@ -62,20 +58,6 @@ const ItemInfo = () => {
     });
   }
 
-  const takeOrder = async () => {
-    if (!currentUser) {
-      alert("Please login to place an order!");
-      return;
-    }
-    await axios
-      .post("/api/takeOrder", { id: item._id, token: currentUser.token })
-      .then((res) => {
-        console.log(res.data);
-        alert("Order placed successfully!");
-        // navigate("/orders");
-      });
-  };
-
   return (
     <>
       {loading ? (
@@ -108,9 +90,9 @@ const ItemInfo = () => {
               showThumbs={false}
               className="md:w-1/4 p-2 cursor-pointer bg-gray-800 m-5"
             >
-              {blobURLs.map((url,index) => {
+              {blobURLs.map((url) => {
                 return (
-                  <div key={index}>
+                  <div key={url.id}>
                     <img
                       src={url}
                       className=" h-40 object-cover"
@@ -152,12 +134,6 @@ const ItemInfo = () => {
                   <FontAwesomeIcon icon={faMapPin} flip size="2xl" />{" "}
                   <span className="mx-2">{item.pickupLocation}</span>
                 </p>
-                <button
-            className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none"
-            onClick={takeOrder}
-          >
-            Buy Now
-          </button>
               </div>
             </div>
           </div>
