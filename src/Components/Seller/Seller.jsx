@@ -3,7 +3,7 @@ import axios from "axios";
 import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
 
-axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+// axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
 // axios.defaults.baseURL= "http://localhost:5000";
 
 
