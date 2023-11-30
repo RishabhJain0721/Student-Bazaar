@@ -10,8 +10,8 @@ export default function Items() {
   const [searchedItems, setSearchedItems] = useState([]);
   const { currentSearch } = useContext(SearchContext);
 
-//   axios.defaults.baseURL = "https://joyous-beret-worm.cyclic.app";
-axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+  // axios.defaults.baseURL = "http://localhost:5000";
+  axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
 
   // Fetch all items from the database
   useEffect(() => {
