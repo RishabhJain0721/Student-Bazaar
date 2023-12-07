@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import CartImg from "./images/cart.png";
 import ManuImg from "./images/menu.png";
@@ -14,12 +14,20 @@ import { SidebarData } from "./Sidebar";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 export default function Header() {
+  const navigate = useNavigate();
+  const [search, setSearch] = useState("");
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
 
   const { currentUser } = useContext(AuthContext);
   // console.log(currentUser.token);
+
+  const searchHandler = (e) => {
+    e.preventDefault();
+    navigate(`/search/${search}`);
+    window.location.reload();
+  };
 
   return (
     <header className="header">
@@ -68,13 +76,23 @@ export default function Header() {
 
           {/* <!-- search bar  --> */}
           <div className="search-box">
-            <form action="" className="abc">
+            <form action="" className="abc flex flex-row ">
               <input
                 type="text"
                 name="search"
                 id="srch"
                 placeholder="Search here..."
+                value={search}
+                onChange={(e) => {setSearch(e.target.value);
+                console.log(search)}}
               />
+              <button
+                type="submit"
+                className="search-btn"
+                onClick={searchHandler}
+              >
+                <i className="fa-solid fa-search"></i>
+              </button>
             </form>
           </div>
 
@@ -86,68 +104,55 @@ export default function Header() {
             </div>
 
             {currentUser ? (
-              <div className="Login">
+              <Link to="/profile" className="Login">
                 <img src={LoginImg} className="pb-1" alt="" />
-                <Link to="/profile" className="Login-text">
-                  Profile
-                </Link>
+                <div className="Login-text">Profile</div>
                 <div className="Underline"></div>
-              </div>
+              </Link>
             ) : (
               <>
-                <div className="Login">
+                <Link to="/login" className="Login">
                   <img src={LoginImg} alt="" />
-                  <Link to="/login" className="Login-text">
-                    Login
-                  </Link>
+                  <div className="Login-text">Login</div>
                   <div className="Underline"></div>
-                </div>
-                <div className="Login">
+                </Link>
+                <Link to="/signup" className="Login">
                   <i className="fa-solid fa-right-to-bracket text-white text-2xl pb-2"></i>
-                  <Link to="/signup" className="Login-text">
-                    Sign Up
-                  </Link>
+                  <div className="Login-text">Sign Up</div>
                   <div className="Underline"></div>
-                </div>
+                </Link>
               </>
             )}
 
             {currentUser &&
               currentUser.token ===
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
-                <div className="Wish">
+                <Link to="/showOrders" className="Wish">
                   <i className="fa-solid fa-clipboard-list text-white text-3xl pb-2 mt-1"></i>
-                  <Link to="showOrders" className="Wish-text">
-                    Orders
-                  </Link>
+                  <div className="Wish-text">Orders</div>
                   <div className="Underline"></div>
-                </div>
+                </Link>
               )}
 
             {currentUser &&
               currentUser.token ===
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
-                <div className="Cart">
+                <Link to="/sell" className="Cart">
                   <div className=" text-white font-bold text-4xl text-center">
                     +
                   </div>
-                  <Link to="/sell" className="Cart-text">
-                    Add
-                  </Link>
-                  <div className="Underline"></div>
-                </div>
+                  <div className="Cart-text">Add</div>
+                </Link>
               )}
 
             {currentUser &&
               currentUser.token !==
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
-                <div className="Cart">
+                <Link to="/showMyOrders" className="Cart">
                   <i class="fa-solid fa-list-ol text-white text-3xl pb-1"></i>
-                  <Link to="/showMyOrders" className="Cart-text">
-                    My Orders
-                  </Link>
+                  <div className="Cart-text">My Orders</div>
                   <div className="Underline"></div>
-                </div>
+                </Link>
               )}
           </div>
         </div>
@@ -158,11 +163,27 @@ export default function Header() {
             <Link to="/" className="Home">
               Home
             </Link>
-            <Link className="Home">Books</Link>
-            <Link className="Home">Electronics</Link>
-            <Link className="Home">Furniture</Link>
-            <Link className="Home">Other</Link>
-            <Link to="/contactus" className="Home">
+            <Link to="/books" className="Home">
+              Books
+            </Link>
+            <Link to="/electronics" className="Home">
+              Electronics
+            </Link>
+            <Link to="/furniture" className="Home">
+              Furniture
+            </Link>
+            <Link to="/other" className="Home">
+              Other
+            </Link>
+            <Link
+              className="Home"
+              onClick={() =>
+                window.scrollTo({
+                  top: document.body.scrollHeight,
+                  behavior: "smooth",
+                })
+              }
+            >
               Contact us
             </Link>
             <Link to="/about" className="Home">

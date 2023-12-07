@@ -95,7 +95,7 @@ const ItemInfo = () => {
               Dashboard
             </Link>
           </div>
-          <div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row">
+          <div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row w-11/12">
             {/* Image Carousel */}
             <Carousel
               infiniteLoop
@@ -106,14 +106,14 @@ const ItemInfo = () => {
               }}
               showArrows={true}
               showThumbs={false}
-              className="md:w-1/4 p-2 cursor-pointer bg-gray-800 m-5"
+              className="md:w-1/2 p-2 cursor-pointer bg-gray-800 m-5"
             >
               {blobURLs.map((url,index) => {
                 return (
                   <div key={index}>
                     <img
                       src={url}
-                      className=" h-40 object-cover"
+                      className=" h-64 object-cover"
                       alt="Product"
                     />
                   </div>
@@ -134,6 +134,10 @@ const ItemInfo = () => {
 
               {/* Description */}
               <p className="text-gray-700 mt-2">{item.itemDescription}</p>
+
+              <div className="mt-4">
+              <p className="font-semibold text-xl mb-3">Category : {item.category}</p>
+              </div>
 
               {/* Provider Details */}
               <div className="mt-4">

@@ -27,11 +27,16 @@ import { ItemContextProvider } from "./Contexts/ItemContext.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route path="" element={<Home />} />
+      <Route path="" element={<Home category="" />} />
       <Route path="about" element={<AboutSection />} />
-      <Route path="contactus" element={<ContactSection />} />
+      {/* <Route path="contactus" element={<ContactSection />} /> */}
       <Route path="signup" element={<Signup />} />
       <Route path="login" element={<Login />} />
+      <Route path="search/:searchedItem" element={<Home category="" search="yes" />} />
+      <Route path="books" element={<Home category="Books" />} />
+      <Route path="electronics" element={<Home category="Electronics" />} />
+      <Route path="furniture" element={<Home category="Furniture" />} />
+      <Route path="other" element={<Home category="Other" />} />
       <Route path="verify-email" element={<Verification />} />
       <Route path="profile" element={<Profile />} />
       <Route path="sell" element={<Seller />} />

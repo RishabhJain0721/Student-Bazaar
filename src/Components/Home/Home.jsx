@@ -1,10 +1,9 @@
-import React, { useContext, useState } from "react";
-import { useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
-// import Card from "../Card/Card";
+import React, { useContext, useState, useRef, useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import { InfinitySpin } from "react-loader-spinner";
 import "./Home.css";
 import mianimags from "./images/mian-imags.jpg";
+import logo from "./images/logo.png";
 import book from "./images/book.jpg";
 import bottomLowerLeft from "./images/bottom-lower-left.png";
 import bottomLowerRight from "./images/bottom-lower-right.png";
@@ -16,8 +15,8 @@ import axios from "axios";
 import ItemCard from "../ItemCard/ItemCard";
 import { SearchContext } from "../../Contexts/SearchContext";
 
-axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
-// axios.defaults.baseURL = "http://localhost:5000";
+// axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+axios.defaults.baseURL = "http://localhost:5000";
 
 const App = () => {
   useEffect(() => {
@@ -47,7 +46,9 @@ const App = () => {
   }, []);
 };
 
-export default function Home() {
+export default function Home(props) {
+  const { searchedItem } = useParams();
+  const contentRef = useRef(null);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchedItems, setSearchedItems] = useState([]);
@@ -58,27 +59,32 @@ export default function Home() {
     axios
       .get("/api/dashboard")
       .then((res) => {
-        setItems(res.data);
-        setSearchedItems(res.data);
+        const allItems = res.data;
+        setItems(allItems);
+        if (searchedItem) {
+          const filteredItems = allItems.filter((item) => {
+            return item.itemName
+              .toLowerCase()
+              .includes(searchedItem.toLowerCase());
+          });
+          setSearchedItems(filteredItems);
+        } else {
+          setSearchedItems(allItems);
+        }
         console.log("In Items rendered on dashboard : ", res.data);
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [props.search]);
 
-  // Filter items based on search query
-  useEffect(() => {
-    if (items) {
-      const filteredItems = items.filter((item) => {
-        return item.itemName
-          .toLowerCase()
-          .includes(currentSearch.value.toLowerCase());
-      });
-      setSearchedItems(filteredItems);
+  const scrollToContent = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [currentSearch]);
+  };
+
   return (
     <>
       <div className="main">
@@ -94,16 +100,18 @@ export default function Home() {
               <h4>student essentials</h4>
             </div>
             <div className="btn">
-              <NavLink href="#">
-                <span data-attr="Buy"> Buy</span>
-                <span data-attr="Now">Now </span>
+              <NavLink>
+                <div onClick={scrollToContent}>
+                  <span data-attr="Buy"> Buy</span>
+                  <span data-attr="Now">Now </span>
+                </div>
               </NavLink>
             </div>
           </div>
 
           <div className="main-right">
             <div className="right-image">
-              <img src={mianimags} alt="" />
+              <img src={logo} alt="" />
             </div>
           </div>
         </div>
@@ -135,7 +143,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="text-below-btn">
+      <div className="text-below-btn content" ref={contentRef}>
         <h3>Available Listings :</h3>
       </div>
 
@@ -145,9 +153,19 @@ export default function Home() {
         </div>
       ) : (
         <div className="p-5 flex flex-wrap px-10 justify-center md:justify-start">
-          {searchedItems.map((item) => (
-            <ItemCard key={item._id} rest={item} />
-          ))}
+          {searchedItems
+            .filter(
+              (item) =>
+                props.category !== "" && props.category === item.category
+            )
+            .map((item) => (
+              <ItemCard key={item._id} rest={item} />
+            ))}
+          {searchedItems
+            .filter((item) => props.category === "" || props.category === null)
+            .map((item) => (
+              <ItemCard key={item._id} rest={item} />
+            ))}
         </div>
       )}
 
