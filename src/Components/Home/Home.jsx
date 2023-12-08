@@ -15,8 +15,8 @@ import axios from "axios";
 import ItemCard from "../ItemCard/ItemCard";
 import { SearchContext } from "../../Contexts/SearchContext";
 
-// axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+// axios.defaults.baseURL = "http://localhost:5000";
 
 const App = () => {
   useEffect(() => {

@@ -16,6 +16,7 @@ import { AuthContext } from "../../Contexts/AuthContext";
 export default function Header() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -27,6 +28,10 @@ export default function Header() {
     e.preventDefault();
     navigate(`/search/${search}`);
     window.location.reload();
+  };
+
+  const toggleSearch = () => {
+    setIsSearchVisible(!isSearchVisible);
   };
 
   return (
@@ -83,8 +88,10 @@ export default function Header() {
                 id="srch"
                 placeholder="Search here..."
                 value={search}
-                onChange={(e) => {setSearch(e.target.value);
-                console.log(search)}}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  console.log(search);
+                }}
               />
               <button
                 type="submit"
@@ -98,9 +105,34 @@ export default function Header() {
 
           {/* <!-- side section of bar --> */}
           <div className="side-icons-section">
-            <div className="search">
-              <img src={SearchImg} alt="" />
-              <div className="underline"></div>
+            <div className="search-container p-0 search ">
+              <img
+                src={SearchImg}
+                alt="Search"
+                onClick={toggleSearch}
+                className="cursor-pointer"
+              />
+              {isSearchVisible && (
+                <div className="search-input absolute top-0 right-0 p-2 flex flex-row bg-slate-950">
+                  <input
+                    type="text"
+                    placeholder="Enter your search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="p-2 border rounded mr-2"
+                  />
+                  <button
+                    type="submit"
+                    className="search-btn"
+                    onClick={searchHandler}
+                  >
+                    <i className="fa-solid fa-search"></i>
+                  </button>
+                  <button onClick={toggleSearch} className=" bg-red-700">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              )}
             </div>
 
             {currentUser ? (
@@ -117,7 +149,7 @@ export default function Header() {
                   <div className="Underline"></div>
                 </Link>
                 <Link to="/signup" className="Login">
-                  <i className="fa-solid fa-right-to-bracket text-white text-2xl pb-2"></i>
+                  <i className="fa-solid fa-right-to-bracket text-white text-2xl md:pb-2"></i>
                   <div className="Login-text">Sign Up</div>
                   <div className="Underline"></div>
                 </Link>
@@ -128,7 +160,7 @@ export default function Header() {
               currentUser.token ===
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
                 <Link to="/showOrders" className="Wish">
-                  <i className="fa-solid fa-clipboard-list text-white text-3xl pb-2 mt-1"></i>
+                  <i className="fa-solid fa-clipboard-list text-white text-lg md:text-3xl pb-2 mt-1"></i>
                   <div className="Wish-text">Orders</div>
                   <div className="Underline"></div>
                 </Link>
@@ -138,7 +170,7 @@ export default function Header() {
               currentUser.token ===
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
                 <Link to="/sell" className="Cart">
-                  <div className=" text-white font-bold text-4xl text-center">
+                  <div className=" text-white font-bold text-2xl  md:text-4xl text-center">
                     +
                   </div>
                   <div className="Cart-text">Add</div>
@@ -149,7 +181,7 @@ export default function Header() {
               currentUser.token !==
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IjIxMDA1MjE1MjAwNDFAaWV0bHVja25vdy5hYy5pbiIsImlhdCI6MTcwMTEwODc5MiwiZXhwIjoxNzAxMTk1MTkyfQ.tuoLoyp6HZLgUTqtQy1QTTA5P4Qlc_1uKGO0RRwYtzM" && (
                 <Link to="/showMyOrders" className="Cart">
-                  <i class="fa-solid fa-list-ol text-white text-3xl pb-1"></i>
+                  <i class="fa-solid fa-list-ol text-white text-xl md:text-3xl pb-1"></i>
                   <div className="Cart-text">My Orders</div>
                   <div className="Underline"></div>
                 </Link>
