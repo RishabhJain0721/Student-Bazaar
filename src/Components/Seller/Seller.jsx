@@ -5,8 +5,8 @@ import { InfinitySpin } from "react-loader-spinner";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-// axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+// axios.defaults.baseURL = "http://localhost:5000";
 
 const SellForm = () => {
   const [itemName, setItemName] = useState("");
