@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Input from "../Input/Input";
-import { useNavigate } from "react-router-dom";
+import { InfinitySpin } from "react-loader-spinner";
+
+import { useNavigate, useParams } from "react-router-dom";
 
 // axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
-// axios.defaults.baseURL= "http://localhost:5000";
-
+axios.defaults.baseURL = "http://localhost:5000";
 
 const SellForm = () => {
   const [itemName, setItemName] = useState("");
@@ -15,7 +16,6 @@ const SellForm = () => {
   const [itemCost, setItemCost] = useState("");
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState("");
-  const [bigFileDialogue, setBigFileDialogue] = useState(false);
   const navigate = useNavigate();
 
   const handleImageUpload = (e) => {
@@ -69,6 +69,8 @@ const SellForm = () => {
       setCategory("");
       setPickupLocation("");
       setImages([]);
+
+      window.location.reload();
     } catch (error) {
       console.error("Error:", error);
     }
@@ -123,7 +125,7 @@ const SellForm = () => {
               required
             ></textarea>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <Input
               label="Contact Number"
               name="contactNumber"
@@ -132,7 +134,7 @@ const SellForm = () => {
               value={contactNumber}
               onChange={(e) => setContactNumber(e.target.value)}
             />
-          </div>
+          </div> */}
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">
               Category

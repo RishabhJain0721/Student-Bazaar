@@ -35,12 +35,6 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Contact us',
-    path: '/contact',
-    icon: <i class="fa-solid fa-phone-volume"></i>,
-    cName: 'nav-text'
-  },
-  {
     title: 'About us',
     path: '/about',
     icon: <i class="fa-solid fa-circle-info"></i>,

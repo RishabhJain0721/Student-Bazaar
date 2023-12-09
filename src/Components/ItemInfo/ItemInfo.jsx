@@ -95,7 +95,7 @@ const ItemInfo = () => {
               Dashboard
             </Link>
           </div>
-          <div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row w-11/12">
+          <div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row h-full w-full">
             {/* Image Carousel */}
             <Carousel
               infiniteLoop
@@ -106,14 +106,14 @@ const ItemInfo = () => {
               }}
               showArrows={true}
               showThumbs={false}
-              className="md:w-1/2 p-2 cursor-pointer bg-gray-800 m-5"
+              className="md:w-1/2 h-auto p-2 cursor-pointer bg-gray-800 m-5"
             >
               {blobURLs.map((url,index) => {
                 return (
                   <div key={index}>
                     <img
                       src={url}
-                      className=" h-64 object-cover"
+                      className=" h-96 object-cover"
                       alt="Product"
                     />
                   </div>
@@ -147,11 +147,11 @@ const ItemInfo = () => {
                   <FontAwesomeIcon icon={faUser} size="xl" />{" "}
                   <span className="mx-2"> {item.userName} </span>
                 </p>
-                <p className="py-1 ">
+                {/* <p className="py-1 ">
                   {" "}
                   <FontAwesomeIcon icon={faPhoneVolume} fade size="xl" />{" "}
                   <span className="mx-2"> {item.contactNumber}</span>
-                </p>
+                </p> */}
                 <p className="py-1 ">
                   <FontAwesomeIcon icon={faMapPin} flip size="2xl" />{" "}
                   <span className="mx-2">{item.pickupLocation}</span>
@@ -160,7 +160,7 @@ const ItemInfo = () => {
             className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none"
             onClick={takeOrder}
           >
-            Buy Now
+            Confirm Order
           </button>
               </div>
             </div>

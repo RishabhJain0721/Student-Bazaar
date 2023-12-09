@@ -40,9 +40,8 @@ export default function Header() {
         <div className="nav-bar-upper-section">
           {/* <!-- student bazaar logo --> */}
 
-          <div className="menu-upper">
+          <div className="menu-upper flex flex-row items-center ">
             <div className="navbar-seactiom">
-              {/* <img src={ManuImg} alt=""/> */}
               <IconContext.Provider value={{ color: "#fff" }}>
                 <div className="navbar">
                   <Link to="#" className="menu-bars">
@@ -188,6 +187,8 @@ export default function Header() {
               )}
           </div>
         </div>
+
+
         <hr className="Break-section" />
 
         <div className="nav-bar-lower-section">

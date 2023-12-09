@@ -21,6 +21,7 @@ import ItemInfo from "./Components/ItemInfo/ItemInfo.jsx";
 import Orders from "./Components/Orders/Orders.jsx";
 import MyOrders from "./Components/MyOrders/MyOrders.jsx";
 import OrderInfo from "./Components/OrderInfo/OrderInfo.jsx";
+import Updation from "./Components/Updation/Updation.jsx";
 import { AuthContextProvider } from "./Contexts/AuthContext.jsx";
 import { ItemContextProvider } from "./Contexts/ItemContext.jsx";
 
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="electronics" element={<Home category="Electronics" />} />
       <Route path="furniture" element={<Home category="Furniture" />} />
       <Route path="other" element={<Home category="Other" />} />
+      <Route path="updateItem/:id" element={<Updation />} />
       <Route path="verify-email" element={<Verification />} />
       <Route path="profile" element={<Profile />} />
       <Route path="sell" element={<Seller />} />

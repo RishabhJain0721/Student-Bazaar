@@ -87,61 +87,67 @@ export default function Home(props) {
 
   return (
     <>
-      <div className="main">
-        <div className="hero">
-          <div className="main-left">
-            <div className="shopAndSave">
-              <h1> Buy & Sell</h1>
-            </div>
-            <div className="left-writ-tex">
-              <h3>Your go to destination for budget-friendly </h3>
-            </div>
-            <div className="studentEssentail">
-              <h4>student essentials</h4>
-            </div>
-            <div className="btn">
-              <NavLink>
-                <div onClick={scrollToContent}>
-                  <span data-attr="Buy"> Buy</span>
-                  <span data-attr="Now">Now </span>
+      {props.category === "" || props.category === null ? (
+        <>
+          <div className="main">
+            <div className="hero">
+              <div className="main-left">
+                <div className="shopAndSave">
+                  <h1> Buy & Sell</h1>
                 </div>
-              </NavLink>
+                <div className="left-writ-tex">
+                  <h3>Your go to destination for budget-friendly </h3>
+                </div>
+                <div className="studentEssentail">
+                  <h4>student essentials</h4>
+                </div>
+                <div className="btn">
+                  <NavLink>
+                    <div onClick={scrollToContent}>
+                      <span data-attr="Buy"> Buy</span>
+                      <span data-attr="Now">Now </span>
+                    </div>
+                  </NavLink>
+                </div>
+              </div>
+
+              <div className="main-right">
+                <div className="right-image hidden sm:block">
+                  <img src={mianimags} alt="" />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="main-right">
-            <div className="right-image">
-              <img src={logo} alt="" />
+          <div className="contact-button">
+            <div className="join-whatsapp-group">
+              <button className="whatsapp-btn">
+                <div className="wi35px">
+                  {" "}
+                  <img id="WhatsApp_icon_35px" src={whatsapp} alt="" />{" "}
+                </div>
+                <div className="wtext">
+                  <pre> JOIN WHATSAPP GROUP</pre>
+                </div>
+              </button>
+            </div>
+
+            <div className="join_telegram_channel">
+              <button className="join-telegrma-btn">
+                <div className="ti35px">
+                  {" "}
+                  <img id="telegram_icon_45px" src={telegram} alt="" />{" "}
+                </div>
+                <div className="tText">
+                  <pre> JOIN TELEGRAM GROUP</pre>
+                </div>
+              </button>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="contact-button">
-        <div className="join-whatsapp-group">
-          <button className="whatsapp-btn">
-            <div className="wi35px">
-              {" "}
-              <img id="WhatsApp_icon_35px" src={whatsapp} alt="" />{" "}
-            </div>
-            <div className="wtext">
-              <pre> JOIN WHATSAPP GROUP</pre>
-            </div>
-          </button>
-        </div>
-
-        <div className="join_telegram_channel">
-          <button className="join-telegrma-btn">
-            <div className="ti35px">
-              {" "}
-              <img id="telegram_icon_45px" src={telegram} alt="" />{" "}
-            </div>
-            <div className="tText">
-              <pre> JOIN TELEGRAM GROUP</pre>
-            </div>
-          </button>
-        </div>
-      </div>
+        </>
+      ) : (
+        <></>
+      )}
 
       <div className="text-below-btn content" ref={contentRef}>
         <h3>Available Listings :</h3>

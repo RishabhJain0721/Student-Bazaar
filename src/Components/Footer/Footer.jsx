@@ -7,12 +7,6 @@ export default function Footer() {
     <>
       <footer>
         <div className="footer1">
-          <hr className="border-t-2 border-red-600" />
-
-          <div className=" text-xl md:text-5xl text-center font-bold bg-white p-2">
-            Contact Details
-          </div>
-          <hr className="border-t-2 border-red-600" />
           <div className="names">
             <div className="logo2">
               Student <span style={{ color: "white" }}>Bazaar</span>

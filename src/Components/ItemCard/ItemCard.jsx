@@ -65,7 +65,7 @@ const ItemCard = (props) => {
           </p>
           <button
             className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none"
-            onClick={takeOrder}
+            onClick={moreInfo}
           >
             Buy Now
           </button>
