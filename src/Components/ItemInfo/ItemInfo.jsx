@@ -14,7 +14,7 @@ import { InfinitySpin } from "react-loader-spinner";
 import { AuthContext } from "../../Contexts/AuthContext";
 
 // axios.defaults.baseURL = "http://localhost:5000";
-// axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
+axios.defaults.baseURL = "https://dark-gray-butterfly-yoke.cyclic.app";
 
 const ItemInfo = () => {
   const { id } = useParams();
