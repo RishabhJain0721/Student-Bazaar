@@ -104,7 +104,7 @@ export default function Header() {
 
           {/* <!-- side section of bar --> */}
           <div className="side-icons-section">
-            <div className="search-container p-0 search ">
+            {/* <div className="search-container p-0 search ">
               <img
                 src={SearchImg}
                 alt="Search"
@@ -132,7 +132,7 @@ export default function Header() {
                   </button>
                 </div>
               )}
-            </div>
+            </div> */}
 
             {currentUser ? (
               <Link to="/profile" className="Login">
@@ -188,8 +188,20 @@ export default function Header() {
           </div>
         </div>
 
-
         <hr className="Break-section" />
+
+        <div className="search-input p-2 flex flex-row bg-slate-950">
+          <input
+            type="text"
+            placeholder="Enter your search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="p-2 border rounded mr-2"
+          />
+          <button type="submit" className="search-btn" onClick={searchHandler}>
+            <i className="fa-solid fa-search"></i>
+          </button>
+        </div>
 
         <div className="nav-bar-lower-section">
           <ul className="icons">

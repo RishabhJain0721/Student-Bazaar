@@ -127,7 +127,9 @@ export default function Home(props) {
                   <img id="WhatsApp_icon_35px" src={whatsapp} alt="" />{" "}
                 </div>
                 <div className="wtext">
-                  <pre> JOIN WHATSAPP GROUP</pre>
+                  <a href="https://chat.whatsapp.com/DLf9wlGi7T7LQCDGrHllcS">
+                    JOIN TELEGRAM GROUP
+                  </a>
                 </div>
               </button>
             </div>
@@ -139,7 +141,7 @@ export default function Home(props) {
                   <img id="telegram_icon_45px" src={telegram} alt="" />{" "}
                 </div>
                 <div className="tText">
-                  <pre> JOIN TELEGRAM GROUP</pre>
+                  <a href="https://t.me/storeiet">JOIN TELEGRAM GROUP</a>
                 </div>
               </button>
             </div>
