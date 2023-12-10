@@ -190,7 +190,7 @@ export default function Header() {
 
         <hr className="Break-section" />
 
-        <div className="search-input p-2 flex flex-row bg-slate-950">
+        <div className="search-input md:hidden p-2 flex flex-row bg-slate-950">
           <input
             type="text"
             placeholder="Enter your search"
