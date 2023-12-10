@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faIndianRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Contexts/AuthContext";
@@ -47,10 +49,10 @@ const ItemCard = (props) => {
           <img
             src={src}
             alt={props.rest.itemName}
-            className="w-full h-48 sm:h-64 object-cover rounded-lg object-center"
+            className="w-full h-28 sm:h-64 object-cover rounded-lg object-center"
           />
         </div>
-        <div className="prod-title p-4" onClick={moreInfo}>
+        <div className="prod-title px-3 md:p-4" onClick={moreInfo}>
           <p className="text-lg sm:text-xl text-gray-900 font-bold">
             {props.rest.itemName.length > 9
               ? props.rest.itemName.slice(0, 9) + "..."
@@ -58,15 +60,12 @@ const ItemCard = (props) => {
           </p>
           {/* <p className="text-gray-700">Provider: {props.rest.userName}</p> */}
         </div>
-        <div className="prod-info gap-4 p-4 flex flex-col md:flex-row md:justify-between md:items-center md:h-1/2 ">
-          <p
-            className="text-lg sm:text-xl font-bold text-gray-900"
-            onClick={moreInfo}
-          >
-            Rs. {props.rest.itemCost}
+        <div className="prod-info gap-0 p-1 px-3 md:p-4 flex flex-col md:flex-row md:justify-between md:items-center md:h-1/2 ">
+          <p className="text-red-600 text-md mb-2 md:mb-4" onClick={moreInfo}>
+            <FontAwesomeIcon icon={faIndianRupeeSign} /> {props.rest.itemCost}
           </p>
           <button
-            className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none"
+            className="bg-gray-900 hover:bg-red-500 text-white text-sm md:py-2 md:px-4 rounded-full focus:outline-none"
             onClick={moreInfo}
           >
             Buy Now
