@@ -39,7 +39,7 @@ const ItemCard = (props) => {
       className={`m-0 p-4 ${
         props.width === "full"
           ? "w-full"
-          : `sm:w-1/2 md:w-1/4 lg:w-${props.width} xl:w-${props.width}`
+          : `w-1/2 md:w-1/4 lg:w-${props.width} xl:w-${props.width}`
       } cursor-pointer`}
     >
       <div className="card flex flex-col rounded-lg shadow-md hover:shadow-lg bg-slate-50">
@@ -52,11 +52,13 @@ const ItemCard = (props) => {
         </div>
         <div className="prod-title p-4" onClick={moreInfo}>
           <p className="text-lg sm:text-xl text-gray-900 font-bold">
-            {props.rest.itemName}
+            {props.rest.itemName.length > 9
+              ? props.rest.itemName.slice(0, 9) + "..."
+              : props.rest.itemName}
           </p>
           {/* <p className="text-gray-700">Provider: {props.rest.userName}</p> */}
         </div>
-        <div className="prod-info grid grid-cols-2 gap-4 p-4">
+        <div className="prod-info gap-4 p-4 flex flex-col md:flex-row md:justify-between md:items-center md:h-1/2 ">
           <p
             className="text-lg sm:text-xl font-bold text-gray-900"
             onClick={moreInfo}

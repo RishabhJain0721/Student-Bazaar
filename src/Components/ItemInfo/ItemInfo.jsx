@@ -84,7 +84,7 @@ const ItemInfo = () => {
         </div>
       ) : (
         <div className="overflow-hidden flex-col flex items-center h-screen justify-center bg-gray-800 ">
-          <div className=" items-start w-full m-5 px-14">
+          <div className=" items-start w-full m-5 px-14 hidden md:block">
             <Link
               to="/"
               onClick={() => {
@@ -95,7 +95,7 @@ const ItemInfo = () => {
               Dashboard
             </Link>
           </div>
-          <div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row h-full w-full">
+          <div className="bg-white shadow-lg rounded-lg flex items-center mx-8 md:mx-14 flex-col md:flex-row  md:h-full w-full">
             {/* Image Carousel */}
             <Carousel
               infiniteLoop
@@ -106,14 +106,14 @@ const ItemInfo = () => {
               }}
               showArrows={true}
               showThumbs={false}
-              className="md:w-1/2 h-auto p-2 cursor-pointer bg-gray-800 m-5"
+              className="md:w-1/2 md:h-auto p-2 cursor-pointer bg-gray-800 m-5 mt-10"
             >
-              {blobURLs.map((url,index) => {
+              {blobURLs.map((url, index) => {
                 return (
                   <div key={index}>
                     <img
                       src={url}
-                      className=" h-96 object-cover"
+                      className="h-64 md:h-96 object-cover"
                       alt="Product"
                     />
                   </div>
@@ -136,12 +136,14 @@ const ItemInfo = () => {
               <p className="text-gray-700 mt-2">{item.itemDescription}</p>
 
               <div className="mt-4">
-              <p className="font-semibold text-xl mb-3">Category : {item.category}</p>
+                <p className="font-semibold text-xl mb-3">
+                  Category : {item.category}
+                </p>
               </div>
 
               {/* Provider Details */}
               <div className="mt-4">
-                <p className="font-semibold text-xl mb-3">Provider Details</p>
+                <p className="font-semibold text-xl mb-1 md:mb-3">Provider Details :</p>
                 <p className="py-1 ">
                   {" "}
                   <FontAwesomeIcon icon={faUser} size="xl" />{" "}
@@ -157,11 +159,11 @@ const ItemInfo = () => {
                   <span className="mx-2">{item.pickupLocation}</span>
                 </p>
                 <button
-            className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none"
-            onClick={takeOrder}
-          >
-            Confirm Order
-          </button>
+                  className="bg-gray-900 hover:bg-red-500 text-white py-2 px-4 rounded-full focus:outline-none mb-6"
+                  onClick={takeOrder}
+                >
+                  Confirm Order
+                </button>
               </div>
             </div>
           </div>
