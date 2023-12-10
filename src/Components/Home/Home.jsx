@@ -128,7 +128,7 @@ export default function Home(props) {
                 </div>
                 <div className="wtext">
                   <a href="https://chat.whatsapp.com/DLf9wlGi7T7LQCDGrHllcS">
-                    JOIN TELEGRAM GROUP
+                    JOIN WHATSAPP GROUP
                   </a>
                 </div>
               </button>
